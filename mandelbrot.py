@@ -1,9 +1,15 @@
+# imports packages
 import math
 import random
-import matplotlib as mpl
+import matplotlib.pyplot as plt
 import pandas as pd
+import imageio
+import os
 
 # mandelbrot set maker 
+
+# intializes images
+images = []
 
 # gets depth
 depth = int(input("Depth: "))
@@ -14,15 +20,8 @@ x1, x2, y1, y2 = list(map(float, input("Enter bounds here in the format \"x1 x2 
 # gets count of points
 goal = int(input("Point Count: "))
 
-# declares empty arrays that will store the points
-xVals, yVals = [], []
-
-# declares starting count
-count = 0
-
 # option for only showing the border; if you need a border then perform calculations to limit it
 border = input("Only show a border? [y/n]: ") == "y"
-lowerBound = (1.8 if depth < 20 else (1.6 if depth < 50 else (1.4 if depth < 100 else (1.2 if depth < 200 else 1)))) if border else 0
 
 # gets a random number within the bounds
 def randomInBounds(min, max):
@@ -51,22 +50,51 @@ def test(a, b, depth, lowerBound):
     if value < 2 and value > lowerBound: # edit this to change the border width manually
         return True
 
-while count < goal:
-    # sets bounds for points
-    e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)
+# goes through all the depths
+for d in range(1, depth+1):
 
-    # saves point if test passed
-    try:
-        if test(e, f, depth, lowerBound):
-            xVals.append(e)
-            yVals.append(f)
-            count += 1
-            if not count % (goal // 100): # shows progress
-                print(str(count) + " points generated...")
-    except OverflowError:
-        continue
+    # declares empty arrays that will store the points
+    xVals, yVals = [], []
 
-# plots the graph
-df = pd.DataFrame({'x': xVals, 'y': yVals})
-df.plot.scatter(x = 'x', y = 'y', s = 0.4)
-mpl.pyplot.show()
+    # declares starting count
+    count = 0
+
+    # sets the lowerbound
+    lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1)))) if border else 0
+
+    # performs thing until thing 
+    while count < goal:
+        # sets bounds for points
+        e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)
+
+        # saves point if test passed
+        try:
+            if test(e, f, d, lowerBound):
+                xVals.append(e)
+                yVals.append(f)
+                count += 1
+                if not count % (goal // 100): # shows progress
+                    print(str(count) + " points generated...")
+        except OverflowError:
+            continue
+
+    # plots the graph
+    df = pd.DataFrame({'x': xVals, 'y': yVals})
+    df.plot.scatter(x = 'x', y = 'y', s = 0.4)
+    plt.xlim([x1, x2])
+    plt.ylim([y1, y2])
+    plt.grid(False)
+    plt.axis('off')
+    plt.savefig(f"imgs/plot{d}.png")
+    plt.clf()
+
+# gets images
+for d in range(1, depth+1):
+    images.append(imageio.imread(f"imgs/plot{d}.png"))
+
+# creates gif
+imageio.mimsave("plot.gif", images, duration=0.1)
+
+# removes files
+for d in range(1, depth+1):
+    os.remove(f"imgs/plot{d}.png")
