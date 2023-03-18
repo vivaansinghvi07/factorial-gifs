@@ -1,7 +1,7 @@
 """
-    This program is here in case you have stopped generation of a GIF prematurely 
-    and are left with just images, but you still want to generate a GIF from
-    what you have.
+    This program is here in case you have stopped generation of a GIF 
+    prematurely and are left with just images, but you still want to 
+    generate a GIF from what you have.
 """
 # imports needed libraries
 import imageio
