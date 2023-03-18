@@ -73,7 +73,7 @@ for d in range(1, depth+1):
                 xVals.append(e)
                 yVals.append(f)
                 count += 1
-                if not count % (goal // 100): # shows progress
+                if not count % (goal // 10): # shows progress
                     print(str(count) + " points generated...")
         except OverflowError:
             continue
@@ -87,6 +87,9 @@ for d in range(1, depth+1):
     plt.axis('off')
     plt.savefig(f"imgs/plot{d}.png")
     plt.clf()
+
+    # prints progress
+    print(f"Plot with depth {d} done.")
 
 # gets images
 for d in range(1, depth+1):
