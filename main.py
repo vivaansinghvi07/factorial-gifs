@@ -60,7 +60,7 @@ def getCenter(x1, x2, y1, y2, d):
         e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)       ### IF YOU WANT YOUR OWN CENTER, WRITE "e, f = x, y" WHERE X AND Y ARE THE COORDINATES
 
         # gets a lower bound for the test
-        lb = 1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1.05)))
+        lb = 1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1.02)))
 
         # returns the point if good
         try:
@@ -83,7 +83,7 @@ for d in range(1, depth+1):
     count = 0
 
     # sets the lowerbound
-    lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1.05)))) if border else 0
+    lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1.02)))) if border else 0
 
     # performs thing until thing 
     while count < goal:
