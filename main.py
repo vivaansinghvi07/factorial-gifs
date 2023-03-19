@@ -66,7 +66,7 @@ def getCenter(x1, x2, y1, y2, d):
         e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)       ### IF YOU WANT YOUR OWN CENTER, WRITE "e, f = x, y" WHERE X AND Y ARE THE COORDINATES
 
         # gets a lower bound for the test
-        lb = 1.9 if d < 20 else (1.8 if d < 50 else 1.7)            ### Different bounds to make sure its truly on the border
+        lb = 1.98 if d < 300 else 1.97 if d < 500 else 1.96         ### Make sure its truly on the border
 
         # returns the point if good
         try:
