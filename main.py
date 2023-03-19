@@ -134,4 +134,5 @@ for d in range(1, depth+1):
     os.remove(f"imgs/plot{d}.png")
 
 # prints center
-print(f"Your center was ({cx}, {cy})")
+if zoom:
+    print(f"Your center was ({cx}, {cy})")
