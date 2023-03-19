@@ -31,7 +31,7 @@ Depending on your settings, the program will generate various GIFS. Here are exa
 
 ```
 Depth: 50
-Bounds: -2 0.5 -1 1
+Bounds: -2 0.5 -1.2 1.2
 Point Count: 200000
 Only a border: n
 Zoom: n
