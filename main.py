@@ -57,6 +57,10 @@ def test(a, b, depth, lowerBound):
 
 # gets the point to zoom into
 def getCenter(x1, x2, y1, y2, d):
+
+    # prints status message
+    print("Getting center...")
+
     while True:
         # gets random point
         e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)       ### IF YOU WANT YOUR OWN CENTER, WRITE "e, f = x, y" WHERE X AND Y ARE THE COORDINATES
