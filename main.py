@@ -6,7 +6,9 @@ import pandas as pd
 import imageio
 import os
 
-# mandelbrot set maker 
+# constants
+ZOOMSPEED = 0.05        # change this to change zoom speed if there is a bug or anything
+FRAMEDURATION = 0.1     # number of seconds a frame lasts
 
 # intializes images
 images = []
@@ -60,7 +62,7 @@ def getCenter(x1, x2, y1, y2, d):
         e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)       ### IF YOU WANT YOUR OWN CENTER, WRITE "e, f = x, y" WHERE X AND Y ARE THE COORDINATES
 
         # gets a lower bound for the test
-        lb = 1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1.02)))
+        lb = 1.9 if d < 20 else (1.8 if d < 50 else 1.6)
 
         # returns the point if good
         try:
@@ -83,7 +85,7 @@ for d in range(1, depth+1):
     count = 0
 
     # sets the lowerbound
-    lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1.02)))) if border else 0
+    lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1)))) if border else 0
 
     # performs thing until thing 
     while count < goal:
@@ -116,10 +118,10 @@ for d in range(1, depth+1):
 
     # gets the new bounds (if needed)
     if zoom:
-        x1 = x1 - (x1 - cx) * 0.05
-        x2 = x2 - (x2 - cx) * 0.05
-        y1 = y1 - (y1 - cy) * 0.05
-        y2 = y2 - (y2 - cy) * 0.05
+        x1 = x1 - (x1 - cx) * ZOOMSPEED
+        x2 = x2 - (x2 - cx) * ZOOMSPEED
+        y1 = y1 - (y1 - cy) * ZOOMSPEED
+        y2 = y2 - (y2 - cy) * ZOOMSPEED
 
 
 # gets images
@@ -127,7 +129,7 @@ for d in range(1, depth+1):
     images.append(imageio.imread(f"imgs/plot{d}.png"))
 
 # creates gif
-imageio.mimsave("plot.gif", images, duration=0.1)
+imageio.mimsave("plot.gif", images, duration=FRAMEDURATION)
 
 # removes files
 for d in range(1, depth+1):
