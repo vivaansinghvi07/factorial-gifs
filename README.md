@@ -66,3 +66,19 @@ Zoom: y
 Note: I do not have the center point that was generated because I added printing the center afterwards.
 
 Personally, I like how you can see the graph become less and less smooth as you zoom in - something you don't often see in other demonstrations.
+
+### Another Zoom
+
+```
+Depth: 400
+Bounds: -2 0.5 -1.2 1.2
+Point Count: 350000
+Only a border: n
+Zoom: y
+```
+
+![Zoom 2](examples/mandelbrot-zoom2.gif)
+
+```
+Center: (-0.9910690589907436, -0.2791206424126276)
+```
