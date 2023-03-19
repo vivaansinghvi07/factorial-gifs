@@ -13,7 +13,7 @@ A spin-off of my old project [here](https://github.com/vivaansinghvi07/factorial
 
 ## Usage
 
-Run `main.py`, and follow the instructions below to create!
+As the program runs, it will place images in the `imgs` folder, and when complete, it will generate a GIF named `plot.gif` in the main directory. If you terminate the program prematurely, you can run `creategif.py` to generate a GIF using the images you have remaining (note: if you use this program, do not delete any images or it will not work properly). Run `main.py`, and follow the instructions below to create!
 
 ### Inputs
 
