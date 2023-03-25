@@ -12,8 +12,8 @@ FRAMEDURATION = 0.1                 # number of seconds a frame lasts
 XPOINTS = 1000                      # number of points on x-axis on grid
 YPOINTS = 500                       # number of points on y-axis on grid
 BORDERS = [-2, 0.5, -1.1, 1.1]      # [x1, x2, y1, y2]
-ZOOM = True
-BORDER = True
+ZOOM = True                         # zoom into random point?
+BORDERONLY = True                   # have only borders?
 
 # intializes images
 images = []
@@ -25,7 +25,7 @@ depth = int(input("Depth: "))
 x1, x2, y1, y2 = BORDERS
 
 # option for only showing the border; if you need a border then perform calculations to limit it
-border = BORDER
+border = BORDERONLY
 
 # zoom or not
 zoom = ZOOM
