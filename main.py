@@ -19,14 +19,11 @@ depth = int(input("Depth: "))
 # gets bounds
 x1, x2, y1, y2 = list(map(float, input("Enter bounds here in the format \"x1 x2 y1 y2\": ").split(" ")))
 
-# gets count of points
-goal = int(input("Point Count: "))
-
 # option for only showing the border; if you need a border then perform calculations to limit it
 border = input("Only show a border? [y/n]: ") == "y"
 
 # zoom or not
-zoom = input("Would you like the graph to slowly zoom to a random point? (y/n): ") == "y"
+zoom = input("Would you like the graph to slowly zoom to a random point? [y/n]: ") == "y"
 
 # gets a random number within the bounds
 def randomInBounds(min, max):
@@ -66,7 +63,7 @@ def getCenter(x1, x2, y1, y2, d):
         e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)       ### IF YOU WANT YOUR OWN CENTER, WRITE "e, f = x, y" WHERE X AND Y ARE THE COORDINATES
 
         # gets a lower bound for the test
-        lb = 1.98 if d < 300 else 1.97 if d < 500 else 1.96         ### Make sure its truly on the border
+        lb = 1 + .9999 ** d     ### Make sure its truly on the border
 
         # returns the point if good
         try:
@@ -85,27 +82,22 @@ for d in range(1, depth+1):
     # declares empty arrays that will store the points
     xVals, yVals = [], []
 
-    # declares starting count
-    count = 0
-
     # sets the lowerbound
     lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1)))) if border else 0
 
     # performs thing until thing 
-    while count < goal:
-        # sets bounds for points
-        e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)
+    for a in range(3001):
+        for b in range(1501):
 
-        # saves point if test passed
-        try:
-            if test(e, f, d, lowerBound):
-                xVals.append(e)
-                yVals.append(f)
-                count += 1
-                if not count % (goal // 10): # shows progress
-                    print(str(count) + " points generated...")
-        except OverflowError:
-            continue
+            e, f = ((x2-x1)/3000) * a + x1, ((y2-y1)/1500) * b + y1
+
+            # saves point if test passed
+            try:
+                if test(e, f, d, lowerBound):
+                    xVals.append(e)
+                    yVals.append(f)
+            except OverflowError:
+                continue
 
     # plots the graph
     df = pd.DataFrame({'x': xVals, 'y': yVals})
