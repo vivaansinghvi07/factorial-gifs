@@ -7,8 +7,13 @@ import imageio
 import os
 
 # constants
-ZOOMSPEED = 0.05        # change this to change zoom speed if there is a bug or anything
-FRAMEDURATION = 0.1     # number of seconds a frame lasts
+ZOOMSPEED = 0.05                    # change this to change zoom speed if there is a bug or anything
+FRAMEDURATION = 0.1                 # number of seconds a frame lasts
+XPOINTS = 1000                      # number of points on x-axis on grid
+YPOINTS = 500                       # number of points on y-axis on grid
+BORDERS = [-2, 0.5, -1.1, 1.1]      # [x1, x2, y1, y2]
+ZOOM = True
+BORDER = True
 
 # intializes images
 images = []
@@ -17,13 +22,13 @@ images = []
 depth = int(input("Depth: "))
 
 # gets bounds
-x1, x2, y1, y2 = list(map(float, input("Enter bounds here in the format \"x1 x2 y1 y2\": ").split(" ")))
+x1, x2, y1, y2 = BORDERS
 
 # option for only showing the border; if you need a border then perform calculations to limit it
-border = input("Only show a border? [y/n]: ") == "y"
+border = BORDER
 
 # zoom or not
-zoom = input("Would you like the graph to slowly zoom to a random point? [y/n]: ") == "y"
+zoom = ZOOM
 
 # gets a random number within the bounds
 def randomInBounds(min, max):
@@ -86,10 +91,10 @@ for d in range(1, depth+1):
     lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1)))) if border else 0
 
     # performs thing until thing 
-    for a in range(3001):
-        for b in range(1501):
+    for a in range(XPOINTS+1):
+        for b in range(YPOINTS+1):
 
-            e, f = ((x2-x1)/3000) * a + x1, ((y2-y1)/1500) * b + y1
+            e, f = ((x2-x1)/XPOINTS) * a + x1, ((y2-y1)/YPOINTS) * b + y1
 
             # saves point if test passed
             try:
