@@ -6,7 +6,7 @@ import pandas as pd
 import imageio.v2 as imageio
 import os
 
-# constants
+# constants and settings
 ZOOMSPEED = 0.045                               # change this to change zoom speed if there is a bug or anything
 FRAMEDURATION = 0.1                             # number of seconds a frame lasts
 POINTCOUNT = 1_000_000                          # number of points
@@ -17,12 +17,13 @@ BORDERS = [-2, 0.5, -1.1, 1.1]                  # [x1, x2, y1, y2]
 ZOOM = False                                    # zoom into random point?
 BORDERONLY = True                               # have only borders?
 CENTERSTRICTNESS = 0.99999                      # change how strict the center's border is (higher = more time, max = 1)
+DEPTH = 30                                      # how many frames will be there?
 
 # intializes images
 images = []
 
 # gets depth
-depth = int(input("Depth: "))
+depth = DEPTH
 
 # gets bounds
 x1, x2, y1, y2 = BORDERS
@@ -91,7 +92,8 @@ for d in range(1, depth+1):
     xVals, yVals = [], []
 
     # sets the lowerbound
-    lowerBound = (1+0.9999**d) if border else 0
+    lowerBound = (1+0.99**(100*d)) if border else 0
+
 
     # performs thing until thing 
     for a in range(XPOINTS+1):
