@@ -7,13 +7,16 @@ import imageio
 import os
 
 # constants
-ZOOMSPEED = 0.045                       # change this to change zoom speed if there is a bug or anything
-FRAMEDURATION = 0.1                     # number of seconds a frame lasts
-XPOINTS = 1000                          # number of points on x-axis on grid
-YPOINTS = 500                           # number of points on y-axis on grid
-BORDERS = [-2, 0.5, -1.1, 1.1]          # [x1, x2, y1, y2]
-ZOOM = True                             # zoom into random point?
-BORDERONLY = False                      # have only borders?
+ZOOMSPEED = 0.045                               # change this to change zoom speed if there is a bug or anything
+FRAMEDURATION = 0.1                             # number of seconds a frame lasts
+POINTCOUNT = 1_000_000                          # number of points
+POINTMULTIPLIER = math.sqrt(POINTCOUNT / 12)    # x-y multiplier for points
+XPOINTS = POINTMULTIPLIER * 4                   # number of points on x-axis on grid (generally higher when you want a borders - more clear)
+YPOINTS = POINTMULTIPLIER * 3                   # number of points on y-axis on grid
+BORDERS = [-2, 0.5, -1.1, 1.1]                  # [x1, x2, y1, y2]
+ZOOM = False                                    # zoom into random point?
+BORDERONLY = True                               # have only borders?
+CENTERSTRICTNESS = 0.99999                      # change how strict the center's border is (higher = more time, max = 1)
 
 # intializes images
 images = []
@@ -68,7 +71,7 @@ def getCenter(x1, x2, y1, y2, d):
         e, f = randomInBounds(x1, x2), randomInBounds(y1, y2)       ### IF YOU WANT YOUR OWN CENTER, WRITE "e, f = x, y" WHERE X AND Y ARE THE COORDINATES
 
         # gets a lower bound for the test
-        lb = 1 + .99999 ** d     ### Make sure its truly on the border
+        lb = 1 + CENTERSTRICTNESS ** d     ### Make sure its truly on the border
 
         # returns the point if good
         try:
