@@ -4,7 +4,7 @@
     generate a GIF from what you have.
 """
 # imports needed libraries
-import imageio
+import imageio.v2 as imageio
 import os
 
 # creates images array and depth counter

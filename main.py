@@ -3,7 +3,7 @@ import math
 import random
 import matplotlib.pyplot as plt
 import pandas as pd
-import imageio
+import imageio.v2 as imageio
 import os
 
 # constants
