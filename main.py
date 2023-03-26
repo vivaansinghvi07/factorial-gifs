@@ -16,7 +16,7 @@ YPOINTS = int(POINTMULTIPLIER * 3)              # number of points on y-axis on 
 BORDERS = [-2, 0.5, -1.1, 1.1]                  # [x1, x2, y1, y2]
 ZOOM = False                                    # zoom into random point?
 BORDERONLY = True                               # have only borders?
-CENTERSTRICTNESS = 0.99999                      # change how strict the center's border is (higher = more time, max = 1)
+CENTERSTRICTNESS = 0.99999                      # change how strict the center's border is (higher = more time but more accurate, max = 1)
 DEPTH = 30                                      # how many frames will be there?
 
 # intializes images
@@ -92,8 +92,7 @@ for d in range(1, depth+1):
     xVals, yVals = [], []
 
     # sets the lowerbound
-    lowerBound = (1+0.99**(100*d)) if border else 0
-
+    lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1)))) if border else 0
 
     # performs thing until thing 
     for a in range(XPOINTS+1):
