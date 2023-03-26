@@ -91,7 +91,7 @@ for d in range(1, depth+1):
     xVals, yVals = [], []
 
     # sets the lowerbound
-    lowerBound = (1.8 if d < 20 else (1.6 if d < 50 else (1.4 if d < 100 else (1.2 if d < 200 else 1)))) if border else 0
+    lowerBound = (1+0.9999**d) if border else 0
 
     # performs thing until thing 
     for a in range(XPOINTS+1):
