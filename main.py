@@ -9,7 +9,7 @@ import os
 # constants and settings - CHANGE THESE AS YOU WISH
 ZOOMSPEED = 0.045                               # change this to change zoom speed if there is a bug or anything
 FRAMEDURATION = 0.1                             # number of seconds a frame lasts
-POINTCOUNT = 10_000                          # number of points
+POINTCOUNT = 300_000                          # number of points
 POINTMULTIPLIER = math.sqrt(POINTCOUNT / 12)    # x-y multiplier for points
 XPOINTS = int(POINTMULTIPLIER * 4)              # number of points on x-axis on grid (generally higher when you want a borders - more clear)
 YPOINTS = int(POINTMULTIPLIER * 3)              # number of points on y-axis on grid
@@ -17,7 +17,7 @@ BORDERS = [-2, 0.5, -1.1, 1.1]                  # [x1, x2, y1, y2]
 ZOOM = True                                     # zoom into random point?
 BORDERONLY = False                              # have only borders?
 CENTERSTRICTNESS = 0.999995                      # change how strict the center's border is (higher = more time but more accurate, max = 1)
-DEPTH = 300                                      # how many frames will be there?
+DEPTH = 500                                      # how many frames will be there?
 
 # intializes images
 images = []
